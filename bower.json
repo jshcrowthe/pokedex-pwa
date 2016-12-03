@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.23",
-    "polymer": "Polymer/polymer#^1.7.0"
+    "polymer": "Polymer/polymer#^1.7.0",
+    "app-layout": "PolymerElements/app-layout#^0.10.6"
   }
 }
