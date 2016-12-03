@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <title>PokeDex</title>
+  <meta name="description" content="A pokedex using Pokeapi.co">
+
+  <!-- Mobile -->
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+  <!-- Chrome / Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="black">
+  <link rel="icon" href="icon.png">
+
+  <!-- Safari / iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png">
+
+  <link rel='import' href='/elements/pokedex-app.html' async>
+</head>
+<body>
+  
+  <!-- Add a top level app component -->
+  <pokedex-app>
+    <!-- App Shell Here -->
+  </pokedex-app>
+
+  <!-- Conditionally load the Web Components Polyfill -->
+  <script>
+    (function() {
+      var webComponentsSupported = ('registerElement' in document
+        && 'import' in document.createElement('link')
+        && 'content' in document.createElement('template'));
+
+      if (!webComponentsSupported) {
+        var wcPoly = document.createElement('script');
+        wcPoly.src = '/bower_components/webcomponentsjs/webcomponents-lite.js';
+        wcPoly.async = true;
+        (document.head || document.getElementsByTagName("head")[0]).appendChild(wcPoly);
+      }
+    })();
+  </script>
+</body>
+</html>
