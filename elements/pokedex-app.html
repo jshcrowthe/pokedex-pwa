@@ -1,6 +1,12 @@
 <link rel='import' href='../bower_components/polymer/polymer.html'>
 <link rel='import' href='../bower_components/app-layout/app-layout.html'>
+<link rel='import' href='../bower_components/iron-pages/iron-pages.html'>
+<link rel='import' href='../bower_components/app-route/app-route.html'>
+<link rel='import' href='../bower_components/app-route/app-location.html'>
+
+<!--Eagerly Load List because it is going to be rendered the most-->
 <link rel='import' href='./pokemon-list.html'>
+
 <!--
 A comment describing this element
 
@@ -58,6 +64,15 @@ Example:
         opacity: 0.15;
       }
     </style>
+
+    <app-location route="{{route}}"></app-location>
+    <app-route
+      route="{{route}}"
+      pattern="/:page"
+      data="{{data}}"
+      tail="{{subroute}}">
+    </app-route>
+
     <div class="background-content fill"></div>
     <app-header-layout has-scrolling-region fullbleed>
       <app-header reveals id='header'>
@@ -66,16 +81,41 @@ Example:
         </app-toolbar>
       </app-header>
       <div class='content fill'>
-        <pokemon-list scroll-target='[[_getScrollTarget()]]'></pokemon-list>
+        <iron-pages class='fill' selected='[[data.page]]' attr-for-selected='data-route' fallback-selection='__home'>
+          <pokemon-list data-route='__home' scroll-target='[[_getScrollTarget()]]'></pokemon-list>
+          <pokemon-viewer route='[[subroute]]' data-route='pokemon'></pokemon-viewer>
+        </iron-pages>
       </div>
     </app-header-layout>
   </template>
   <script>
+  (function() {
+    var routeResourceMap = {
+      pokemon: './pokemon-viewer.html'
+    };
+
+    var resourceFetchArr = [];
+
     Polymer({
       is: 'pokedex-app',
+      observers: [
+        '_pageChanged(data.page)'
+      ],
       _getScrollTarget: function() {
         return this.$.header.scrollTarget;
+      },
+      _pageChanged: function(page) {
+        if (!routeResourceMap[page]) return;
+        var resource = routeResourceMap[page];
+        if (~resourceFetchArr.indexOf(resource)) return;
+        var link = document.createElement('link');
+        link.rel = 'import';
+        link.async = true;
+        link.href = this.resolveUrl(resource);
+        document.head.appendChild(link);
+        resourceFetchArr.push(resource);
       }
     });
+  })();
   </script>
 </dom-module>

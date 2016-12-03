@@ -1,0 +1,115 @@
+<link rel='import' href='../bower_components/polymer/polymer.html'>
+<link rel='import' href='../bower_components/iron-ajax/iron-ajax.html'>
+<link rel='import' href='../bower_components/iron-image/iron-image.html'>
+<link rel='import' href='../bower_components/paper-toast/paper-toast.html'>
+<link rel='import' href='../bower_components/paper-spinner-lite/paper-spinner-lite.html'>
+
+<!--
+A comment describing this element
+
+Example:
+
+    <my-elem></my-elem>
+
+Example:
+
+    <my-elem>
+      <h2>Hello my-elem</h2>
+    </my-elem>
+
+@demo demo/index.html
+-->
+
+<dom-module id="pokemon-viewer">
+  <template>
+    <style>
+      :host {
+        display: block;
+        width: 100%;
+      }
+      
+      *[hidden] {
+        display: none !important;
+      }
+
+      .thumbnail {
+        width: 200px
+      }
+      .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+      }
+      .name {
+        text-transform: capitalize;
+      }
+      .types {
+        font-style:italic;
+      }
+      details {
+        width: 100%;
+      }
+      .center {
+        display: flex;
+        align-items: center;
+      }
+      paper-spinner-lite {
+        margin-right: 15px;
+        --paper-spinner-color: var(--pokedex-red);
+      }
+    </style>
+    <app-route
+      route="{{route}}"
+      pattern="/:id"
+      data="{{routeData}}">
+    </app-route>
+    <iron-ajax auto
+      url='https://pokeapi.co/api/v2/pokemon/[[routeData.id]]/'
+      last-response='{{_pokemon}}'
+      loading='{{_loading}}'></iron-ajax>
+    <div class='content' hidden$='[[_loading]]'>
+      <h1 class='name'>[[_pokemon.name]]</h1>
+      <small class='types'>Types: [[_getTypes(_pokemon.types)]]</small>
+      <img class='thumbnail' src$='[[_pokemon.sprites.front_default]]'></img>
+      <details>
+        <summary>Stats</summary>
+        <div>
+          <ul>
+          <template is='dom-repeat' items='[[_pokemon.stats]]' as='stat'>
+            <li>[[stat.stat.name]]: [[stat.base_stat]]</li>
+          </template>
+          </ul>
+        </div>
+      </details>
+      <details>
+        <summary>Moves</summary>
+        <div>
+          <ul>
+          <template is='dom-repeat' items='[[_pokemon.moves]]' as='move'>
+            <li>[[move.move.name]]</li>
+          </template>
+          </ul>
+        </div>
+      </details>
+    </div>
+    <paper-toast opened='[[_loading]]' duration='0' class='center'>
+      <paper-spinner-lite active></paper-spinner-lite> <span>Loading</span>
+    </paper-toast>
+  </template>
+  <script>
+    Polymer({
+      is: 'pokemon-viewer',
+      properties: {
+        route: {
+          type: Object
+        }
+      },
+      _getTypes: function(arr) {
+        return arr.map(function(obj) {
+          return obj.type.name;
+        }).join(', ');
+      }
+    });
+  </script>
+</dom-module>

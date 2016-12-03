@@ -61,7 +61,8 @@
   <script>
     window.Polymer = window.Polymer || { 
       dom: 'shadow',
-      useNativeCssProperties: true
+      useNativeCssProperties: true,
+      lazyRegister: true
     };
     (function() {
       var webComponentsSupported = ('registerElement' in document
