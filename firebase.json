@@ -9,6 +9,20 @@
         "source": "**",
         "destination": "/index.html"
       }
+    ],
+    "headers": [
+      {
+        "source": "*",
+        "headers": [
+          {"key": "Link", "value": "</bower_components/polymer/polymer-micro.html>;rel=preload;as=document,</bower_components/polymer/polymer-mini.html>;rel=preload;as=document,</bower_components/app-route/app-route.html>;rel=preload;as=document,</bower_components/app-route/app-location.html>;rel=preload;as=document,</bower_components/polymer/polymer.html>;rel=preload;as=document,</bower_components/iron-pages/iron-pages.html>;rel=preload;as=document"}
+        ]
+      },
+      {
+        "source": "/pokemon/*",
+        "headers": [
+          {"key": "Link", "value": "</bower_components/polymer/polymer-micro.html>;rel=preload;as=document,</bower_components/polymer/polymer-mini.html>;rel=preload;as=document,</bower_components/app-route/app-route.html>;rel=preload;as=document,</bower_components/app-route/app-location.html>;rel=preload;as=document,</bower_components/polymer/polymer.html>;rel=preload;as=document,</bower_components/iron-pages/iron-pages.html>;rel=preload;as=document"}
+        ]
+      }
     ]
   }
 }
