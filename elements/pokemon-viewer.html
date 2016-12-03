@@ -1,7 +1,6 @@
 <link rel='import' href='../bower_components/polymer/polymer.html'>
 <link rel='import' href='../bower_components/iron-ajax/iron-ajax.html'>
 <link rel='import' href='../bower_components/iron-image/iron-image.html'>
-<link rel='import' href='../bower_components/paper-toast/paper-toast.html'>
 <link rel='import' href='../bower_components/paper-spinner-lite/paper-spinner-lite.html'>
 
 <!--
@@ -55,8 +54,11 @@ Example:
         align-items: center;
       }
       paper-spinner-lite {
-        margin-right: 15px;
         --paper-spinner-color: var(--pokedex-red);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0);
       }
     </style>
     <app-route
@@ -68,6 +70,7 @@ Example:
       url='https://pokeapi.co/api/v2/pokemon/[[routeData.id]]/'
       last-response='{{_pokemon}}'
       loading='{{_loading}}'></iron-ajax>
+    <paper-spinner-lite active hidden$='[[!_loading]]'></paper-spinner-lite>      
     <div class='content' hidden$='[[_loading]]'>
       <h1 class='name'>[[_pokemon.name]]</h1>
       <small class='types'>Types: [[_getTypes(_pokemon.types)]]</small>
@@ -93,9 +96,6 @@ Example:
         </div>
       </details>
     </div>
-    <paper-toast opened='[[_loading]]' duration='0' class='center'>
-      <paper-spinner-lite active></paper-spinner-lite> <span>Loading</span>
-    </paper-toast>
   </template>
   <script>
     Polymer({

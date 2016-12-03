@@ -1,0 +1,13 @@
+[debug] ----------------------------------------------------------------------
+[debug] Command:      /Users/jshcrowthe/.nvm/versions/node/v6.9.1/bin/node /Users/jshcrowthe/.nvm/versions/node/v6.9.1/bin/firebase serve -p 3000
+[debug] CLI Version:  3.0.8
+[debug] Platform:     darwin
+[debug] Node Version: v6.9.1
+[debug] Time:         Sat Dec 03 2016 14:39:48 GMT-0700 (MST)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[info] Starting Firebase development server...
+[info] 
+[info] Project Directory: /Users/jshcrowthe/Repos/pokedex-pwa
+[info] 
+[info] Server listening at: http://localhost:3000

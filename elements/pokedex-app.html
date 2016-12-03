@@ -30,6 +30,10 @@ Example:
         display: block;
       }
 
+      *[hidden] {
+        display: none !important;
+      }
+
       .header {
         text-align: center;
         background: var(--pokedex-red);
@@ -63,6 +67,14 @@ Example:
         right: 0;
         opacity: 0.15;
       }
+
+      .home-link {
+        position: absolute;
+        color: #FFFFFF;
+        float: left;
+        text-decoration: none;
+        display: flex;
+      }
     </style>
 
     <app-location route="{{route}}"></app-location>
@@ -77,6 +89,13 @@ Example:
     <app-header-layout has-scrolling-region fullbleed>
       <app-header reveals id='header'>
         <app-toolbar class='header'>
+          <a href="/" class='home-link' hidden$='[[_notHome(data.page)]]'>
+            &lt;
+            <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+              <path d="M0 0h24v24H0z" fill="none"/>
+            </svg>
+          </a>
           <div main-title>PokeDex</div>
         </app-toolbar>
       </app-header>
@@ -103,6 +122,9 @@ Example:
       ],
       _getScrollTarget: function() {
         return this.$.header.scrollTarget;
+      },
+      _notHome: function(page) {
+        return page && !routeResourceMap[page];
       },
       _pageChanged: function(page) {
         if (!routeResourceMap[page]) return;
