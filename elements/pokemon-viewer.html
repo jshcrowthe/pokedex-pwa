@@ -1,127 +1,12 @@
 <link rel='import' href='../bower_components/polymer/polymer.html'>
-<link rel='import' href='../bower_components/iron-ajax/iron-ajax.html'>
-<link rel='import' href='../bower_components/iron-image/iron-image.html'>
-<link rel='import' href='../bower_components/paper-spinner-lite/paper-spinner-lite.html'>
-
-<!--
-A comment describing this element
-
-Example:
-
-    <my-elem></my-elem>
-
-Example:
-
-    <my-elem>
-      <h2>Hello my-elem</h2>
-    </my-elem>
-
-@demo demo/index.html
--->
 
 <dom-module id="pokemon-viewer">
   <template>
-    <style>
-      :host {
-        display: block;
-        width: 100%;
-      }
-      
-      *[hidden] {
-        display: none !important;
-      }
-
-      .thumbnail {
-        width: 200px
-      }
-      .content {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-            -ms-flex-direction: column;
-                flex-direction: column;
-        -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
-        padding: 15px;
-      }
-      .name {
-        text-transform: capitalize;
-      }
-      .types {
-        font-style:italic;
-      }
-      details {
-        width: 100%;
-      }
-      .center {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
-      }
-      paper-spinner-lite {
-        --paper-spinner-color: var(--pokedex-red);
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        -webkit-transform: translate3d(-50%, -50%, 0);
-                transform: translate3d(-50%, -50%, 0);
-      }
-    </style>
-    <app-route
-      route="{{route}}"
-      pattern="/:id"
-      data="{{routeData}}">
-    </app-route>
-    <iron-ajax auto
-      url='https://pokeapi.co/api/v2/pokemon/[[routeData.id]]/'
-      last-response='{{_pokemon}}'
-      loading='{{_loading}}'></iron-ajax>
-    <paper-spinner-lite active hidden$='[[!_loading]]'></paper-spinner-lite>      
-    <div class='content' hidden$='[[_loading]]'>
-      <h1 class='name'>[[_pokemon.name]]</h1>
-      <small class='types'>Types: [[_getTypes(_pokemon.types)]]</small>
-      <img class='thumbnail' src$='[[_pokemon.sprites.front_default]]'></img>
-      <details>
-        <summary>Stats</summary>
-        <div>
-          <ul>
-          <template is='dom-repeat' items='[[_pokemon.stats]]' as='stat'>
-            <li>[[stat.stat.name]]: [[stat.base_stat]]</li>
-          </template>
-          </ul>
-        </div>
-      </details>
-      <details>
-        <summary>Moves</summary>
-        <div>
-          <ul>
-          <template is='dom-repeat' items='[[_pokemon.moves]]' as='move'>
-            <li>[[move.move.name]]</li>
-          </template>
-          </ul>
-        </div>
-      </details>
-    </div>
+    <!--Template Stub-->
   </template>
   <script>
     Polymer({
-      is: 'pokemon-viewer',
-      properties: {
-        route: {
-          type: Object
-        }
-      },
-      _getTypes: function(arr) {
-        return arr.map(function(obj) {
-          return obj.type.name;
-        }).join(', ');
-      }
+      is: 'pokemon-viewer'
     });
   </script>
 </dom-module>

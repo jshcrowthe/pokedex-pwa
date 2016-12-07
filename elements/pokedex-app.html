@@ -1,5 +1,4 @@
 <link rel='import' href='../bower_components/polymer/polymer.html'>
-<link rel='import' href='../bower_components/app-layout/app-layout.html'>
 <link rel='import' href='../bower_components/iron-pages/iron-pages.html'>
 <link rel='import' href='../bower_components/app-route/app-route.html'>
 <link rel='import' href='../bower_components/app-route/app-location.html'>
@@ -7,78 +6,8 @@
 <!--Eagerly Load List because it is going to be rendered the most-->
 <link rel='import' href='./pokemon-list.html'>
 
-<!--
-A comment describing this element
-
-Example:
-
-    <my-elem></my-elem>
-
-Example:
-
-    <my-elem>
-      <h2>Hello my-elem</h2>
-    </my-elem>
-
-@demo demo/index.html
--->
-
 <dom-module id="pokedex-app">
   <template>
-    <style>
-      :host {
-        display: block;
-      }
-
-      *[hidden] {
-        display: none !important;
-      }
-
-      .header {
-        text-align: center;
-        background: var(--pokedex-red);
-        color: #FFFFFF;
-      }
-
-      .fill {
-        width: 100%;
-        height: 100%;
-      }
-
-      .content {
-        position: relative;
-      }
-
-      .background-content {
-        position: fixed;
-      }
-
-      .background-content::after {
-        content: '';
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-image: url('data:image/svg+xml;charset=UTF8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20version%3D%221.1%22%20x%3D%220%22%20y%3D%220%22%20width%3D%22864%22%20height%3D%22864%22%20viewBox%3D%220%200%20864%20864%22%20enable-background%3D%22new%200%200%20864%20864%22%20xml%3Aspace%3D%22preserve%22%3E%3Ccircle%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20cx%3D%22447.2%22%20cy%3D%22447.6%22%20r%3D%22348%22/%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20fill%3D%22%23FFFFFF%22%20d%3D%22M573.7%20473.5c-12%2058.9-64.1%20103.2-126.5%20103.2%20-62.4%200-114.5-44.3-126.5-103.2H141.2c13.2%20157.5%20145.1%20281.2%20306%20281.2%20160.9%200%20292.9-123.7%20306-281.2H573.7zM447.2%20357.3c-49.9%200-90.4%2040.5-90.4%2090.4%200%2049.9%2040.5%2090.4%2090.4%2090.4%2049.9%200%2090.4-40.5%2090.4-90.4C537.5%20397.7%20497.1%20357.3%20447.2%20357.3zM447.2%20492.2c-24.6%200-44.6-20-44.6-44.6%200-24.6%2020-44.6%2044.6-44.6%2024.6%200%2044.6%2020%2044.6%2044.6C491.8%20472.3%20471.8%20492.2%20447.2%20492.2z%22/%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20fill%3D%22%23ED1C24%22%20d%3D%22M447.2%20318.5c62.4%200%20114.5%2044.3%20126.5%20103.2h179.5c-13.2-157.5-145.1-281.2-306-281.2%20-160.9%200-292.9%20123.7-306%20281.2h179.5C332.6%20362.8%20384.7%20318.5%20447.2%20318.5z%22/%3E%3C/svg%3E');
-        position: absolute;
-        z-index: -1;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        opacity: 0.15;
-      }
-
-      .home-link {
-        position: absolute;
-        color: #FFFFFF;
-        float: left;
-        text-decoration: none;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-      }
-    </style>
-
     <app-location route="{{route}}"></app-location>
     <app-route
       route="{{route}}"
@@ -87,28 +16,12 @@ Example:
       tail="{{subroute}}">
     </app-route>
 
-    <div class="background-content fill"></div>
-    <app-header-layout has-scrolling-region fullbleed>
-      <app-header reveals id='header'>
-        <app-toolbar class='header'>
-          <a href="/" class='home-link' hidden$='[[_notHome(data.page)]]'>
-            &lt;
-            <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-              <path d="M0 0h24v24H0z" fill="none"/>
-            </svg>
-          </a>
-          <div main-title>PokeDex</div>
-        </app-toolbar>
-      </app-header>
-      <div class='content fill'>
-        <iron-pages class='fill' selected='[[data.page]]' attr-for-selected='data-route' fallback-selection='__home'>
-          <pokemon-list data-route='__home' scroll-target='[[_getScrollTarget()]]'></pokemon-list>
-          <pokemon-viewer route='[[subroute]]' data-route='pokemon'></pokemon-viewer>
-        </iron-pages>
-      </div>
-    </app-header-layout>
+    <iron-pages class='fill' selected='[[data.page]]' attr-for-selected='data-route' fallback-selection='__home'>
+      <pokemon-list data-route='__home'></pokemon-list>
+      <pokemon-viewer data-route='pokemon'></pokemon-viewer>
+    </iron-pages>
   </template>
+  
   <script>
   (function() {
     var routeResourceMap = {
@@ -122,16 +35,11 @@ Example:
       observers: [
         '_pageChanged(data.page)'
       ],
-      _getScrollTarget: function() {
-        return this.$.header.scrollTarget;
-      },
-      _notHome: function(page) {
-        return page && !routeResourceMap[page];
-      },
       _pageChanged: function(page) {
         if (!routeResourceMap[page]) return;
         var resource = routeResourceMap[page];
         if (~resourceFetchArr.indexOf(resource)) return;
+
         var link = document.createElement('link');
         link.rel = 'import';
         link.async = true;
