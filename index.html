@@ -78,6 +78,11 @@
         (document.head || document.getElementsByTagName("head")[0]).appendChild(wcPoly);
       }
     })();
+
+    // Conditionally Load the Service Worker
+    if (navigator.serviceWorker) {
+      navigator.serviceWorker.register('/service-worker.js', { scope: '/' });
+    }
   </script>
 </body>
 </html>

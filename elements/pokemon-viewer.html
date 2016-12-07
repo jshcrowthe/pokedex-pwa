@@ -102,6 +102,7 @@
         }
       },
       _getTypes: function(arr) {
+        if (!Array.isArray(arr)) return;
         return arr.map(function(obj) {
           return obj.type.name;
         }).join(', ');
