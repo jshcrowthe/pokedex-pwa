@@ -1,25 +1,8 @@
 <link rel='import' href='../bower_components/polymer/polymer.html'>
-<link rel='import' href='../bower_components/iron-list/iron-list.html'>
 <link rel='import' href='../bower_components/iron-scroll-threshold/iron-scroll-threshold.html'>
 <link rel='import' href='../bower_components/iron-ajax/iron-ajax.html'>
 <link rel='import' href='../bower_components/paper-toast/paper-toast.html'>
 <link rel='import' href='../bower_components/paper-spinner/paper-spinner-lite.html'>
-
-<!--
-A comment describing this element
-
-Example:
-
-    <my-elem></my-elem>
-
-Example:
-
-    <my-elem>
-      <h2>Hello my-elem</h2>
-    </my-elem>
-
-@demo demo/index.html
--->
 
 <dom-module id="pokemon-list">
   <template>
@@ -39,6 +22,7 @@ Example:
       }
 
       .pokemon-link {
+        display: block;
         padding: 15px;
         color: #333333;
         text-decoration: none;
@@ -62,11 +46,9 @@ Example:
       url='https://pokeapi.co/api/v2/pokemon/?offset=[[_offset]]'
       on-response='_handleResponse'
       loading='{{_loading}}'></iron-ajax>
-    <iron-list class='list' items='[[_pokemon]]' as='pokemon' scroll-target='[[scrollTarget]]'>
-      <template>
-        <a class='pokemon-link' href$="/pokemon/[[_getId(pokemon.url)]]">[[pokemon.name]]</a>
-      </template>
-    </iron-list>
+    <template is='dom-repeat' items='[[_pokemon]]' as='pokemon'>
+      <a class='pokemon-link' href$="/pokemon/[[_getId(pokemon.url)]]">[[pokemon.name]]</a>
+    </template>
     <!-- this element will load more data when the user scrolls down and reached the lower threshold -->
     <iron-scroll-threshold id="scrollThreshold"
       on-lower-threshold="_moveOffset"
