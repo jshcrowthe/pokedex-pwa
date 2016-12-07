@@ -57,13 +57,15 @@
     <svg class='fill' xmlns="http://www.w3.org/2000/svg" version="1.1" x="0" y="0" width="864" height="864" viewBox="0 0 864 864" enable-background="new 0 0 864 864" xml:space="preserve"><circle fill-rule="evenodd" clip-rule="evenodd" cx="447.2" cy="447.6" r="348"/><path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M573.7 473.5c-12 58.9-64.1 103.2-126.5 103.2 -62.4 0-114.5-44.3-126.5-103.2H141.2c13.2 157.5 145.1 281.2 306 281.2 160.9 0 292.9-123.7 306-281.2H573.7zM447.2 357.3c-49.9 0-90.4 40.5-90.4 90.4 0 49.9 40.5 90.4 90.4 90.4 49.9 0 90.4-40.5 90.4-90.4C537.5 397.7 497.1 357.3 447.2 357.3zM447.2 492.2c-24.6 0-44.6-20-44.6-44.6 0-24.6 20-44.6 44.6-44.6 24.6 0 44.6 20 44.6 44.6C491.8 472.3 471.8 492.2 447.2 492.2z"/><path fill-rule="evenodd" clip-rule="evenodd" fill="#ED1C24" d="M447.2 318.5c62.4 0 114.5 44.3 126.5 103.2h179.5c-13.2-157.5-145.1-281.2-306-281.2 -160.9 0-292.9 123.7-306 281.2h179.5C332.6 362.8 384.7 318.5 447.2 318.5z"/></svg>
   </pokedex-app>
 
-  <!-- Conditionally load the Web Components Polyfill -->
   <script>
+    // Configure Polymer Load
     window.Polymer = window.Polymer || { 
       dom: 'shadow',
       useNativeCssProperties: true,
       lazyRegister: true
     };
+
+    // Conditionally load the Web Components Polyfill
     (function() {
       var webComponentsSupported = ('registerElement' in document
         && 'import' in document.createElement('link')
